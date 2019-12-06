@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test des websockets</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script language="JavaScript">
+    connect = function() {
+      if (! window.socket) {
+        window.socket = new WebSocket("ws://localhost:8080/websocket");
+        window.socket.onopen = function (ws, evt) {
+          $('#statut').val("Ouverte");
+          $('#btnConnect').val("Fermer");
+        };
+        window.socket.onerror = function (ev) { alert(ev.data); };
+        window.socket.onclose = function (ws, evt) {
+          $('#statut').val("Fermée");
+          $('#btnConnect').val("Connecter");
+          window.socket = undefined;
+        };
+        window.socket.onmessage = function (evt) {
+          $('#toRecv').append(evt.data);
+        };
+      } else {
+        window.socket.close();
+      }
+    };
+    send = function () {
+      window.socket.send($('#toSend').val());
+    }
+  </script>
+</head>
+<body>
+  <FORM>
+    <label for="statut">Statut de la webSocket : </label><input id="statut" contenteditable="false" value="Fermée" disabled> <BR>
+    <input type="button" value="Connecter" id="btnConnect" onclick="connect()"><BR>
+    <HR/>
+    <textarea placeholder="Texte à envoyer" style="width: 100%;height: 10em" id="toSend"></textarea> <BR>
+    <div style="text-align: right"><input type="button" value="Envoyer" onclick="send()"></div>
+    <HR/>
+    <textarea placeholder="Texte à recevoir" style="width: 100%; height: 10em; overflow-scrolling: auto" id="toRecv" contenteditable="false" disabled></textarea> <BR>
+  </FORM>
+</body>
+</html>

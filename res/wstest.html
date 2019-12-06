@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>WebSocket Client</title>
+
+ <script type="text/javascript">
+
+      var wsocket;      
+
+      function connect() {         
+
+          wsocket = new WebSocket("ws://localhost:8080");          
+          wsocket.onopen = onopen;
+          wsocket.onmessage = onmessage;
+          wsocket.onclose = onclose; 
+      }
+
+      function onopen() {
+          console.log("Connected!");             
+          wsocket.send('hello from client');
+      }
+
+      function onmessage(event) { 
+         console.log("Data received: " + event.data); 
+      }
+
+      function onclose(e) {
+         console.log("Connection closed.");              
+      }
+
+      window.addEventListener("load", connect, false);
+
+  </script>
+
+</head>
+
+<body>
+</body>
+
+</html>

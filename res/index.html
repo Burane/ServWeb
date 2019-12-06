@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Bravo</title>
+    <style>
+        @keyframes example {
+            0%   {background-color:red; color:cyan; left:25%; }
+            25%  {background-color:yellow; color: blue; left:50%;}
+            50%  {background-color:blue; color: yellow; left:75%;}
+            75%  {background-color:green;color: pink; left:50%;}
+            100% {background-color:red;color: cyan; left:25%;}
+        }
+        .anim {
+            animation-timing-function: linear;
+            animation-name: example;
+            animation-duration: 40s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            text-align: center;
+            position: relative;
+            border-top-width: 1px;
+            border-right-width: 1px;
+            border-left-width: 1px;
+            border-bottom-width: 1px;
+            outline-style: solid;
+            padding: 2px;
+        }
+        h1 {
+            text-align: center;
+            border-radius: 25px;
+            background-color: red;
+            width: 50%;
+            position: relative;
+            left: 25%;
+        }
+        h2 {
+            background-image: linear-gradient(cyan, aquamarine);
+        }
+        h3 {
+            background-image: linear-gradient(to bottom right,orange, yellow);
+        }
+    </style>
+</head>
+<body>
+  <h1> Félicitations</h1>
+  <p>Le serveur est capable de servir un fichier HTML</p>
+  <br>
+  <h2>Avec une image</h2>
+  <div style="text-align: center;"><img src="site-d-ifs.jpg"></div>
+  <br>
+  <h3>Et du javascript !</h3>
+  <p > <span id="aRemplir" class="anim">Paragraphe vide</span></p>
+  <br>
+<script>
+    window.compteur = 1;
+    change = function () {
+        $('#aRemplir').text("Visites = "+window.compteur);
+        compteur++;
+        setTimeout(change, 100);
+    }
+    setTimeout(change,100);
+</script>
+</body>
+</html>
